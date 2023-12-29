@@ -11,7 +11,7 @@ onMounted(() => {
 });
 
 const fetchData = async () => {
-  const res = await fetch("http://localhost:8080/greeting?name=Iron",
+  const res = await fetch("http://localhost:8080/users",
     {
       // headers: 'Access-Control-Allow-Origin'
     }
@@ -29,7 +29,7 @@ const fetchData = async () => {
 <template>
   <h1>{{ msg }}</h1>
 
-  <div>Answer is {{ content.content }} </div>
+  <div>Answer is {{ content }} </div>
 
   <div class="card">
     <button type="button" @click="count++">count is {{ count }}</button>
