@@ -1,39 +1,39 @@
-package com.example.restservice.services;
+// package com.example.restservice.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.stereotype.Service;
 
-import com.example.restservice.model.User;
-import com.example.restservice.repositories.UserRepository;
+// import com.example.restservice.model.User;
+// import com.example.restservice.repositories.UserRepository;
 
-import java.util.List;
-import java.util.Optional;
+// import java.util.List;
+// import java.util.Optional;
 
-@Service
-public class UserService {
-    @Autowired
-    private UserRepository userRepository;
+// @Service
+// public class UserService {
+// @Autowired
+// private UserRepository userRepository;
 
-    public User creatUser(User user) {
-        return userRepository.save(user);
-    }
+// public User creatUser(User user) {
+// return userRepository.save(user);
+// }
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
+// public List<User> getAllUsers() {
+// return userRepository.findAll();
+// }
 
-    public Optional<User> getUserById(Long id) {
-        return userRepository.findById(id);
-    }
+// public Optional<User> getUserById(Long id) {
+// return userRepository.findById(id);
+// }
 
-    public User updateUser(Long id, User userDetails) {
-        Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
-            User existingUser = user.get();
-            existingUser.setName(userDetails.getName());
-            existingUser.setEmail(userDetails.getEmail());
-            return userRepository.save(existingUser);
-        }
-        return null;
-    }
-}
+// public User updateUser(Long id, User userDetails) {
+// Optional<User> user = userRepository.findById(id);
+// if (user.isPresent()) {
+// User existingUser = user.get();
+// existingUser.setName(userDetails.getName());
+// existingUser.setEmail(userDetails.getEmail());
+// return userRepository.save(existingUser);
+// }
+// return null;
+// }
+// }
