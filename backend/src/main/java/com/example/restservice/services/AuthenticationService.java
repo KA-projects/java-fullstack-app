@@ -1,9 +1,11 @@
 package com.example.restservice.services;
 
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.restservice.model.AuthenticationRequest;
 import com.example.restservice.model.AuthenticationResponse;
 import com.example.restservice.model.RegisterRequest;
 import com.example.restservice.model.User;
@@ -31,6 +33,16 @@ public class AuthenticationService {
         userRepository.save(user);
         var token = jwtService.generateToken(user);
         return AuthenticationResponse.builder().token(token).build();
+    }
+
+    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(),
+                        request.getPassword()));
+        var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
+        var jwtToken = jwtService.generateToken(user);
+        return AuthenticationResponse.builder().token(jwtToken).build();
     }
 
 }

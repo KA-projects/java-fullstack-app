@@ -3,6 +3,7 @@ package com.example.restservice.controllers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.restservice.model.AuthenticationRequest;
 import com.example.restservice.model.AuthenticationResponse;
 import com.example.restservice.model.RegisterRequest;
 import com.example.restservice.services.AuthenticationService;
@@ -19,5 +20,11 @@ public class AuthenticationContaroller {
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody RegisterRequest request) throws Exception {
         return ResponseEntity.ok(authenticationService.register(request));
+    }
+
+    @PostMapping("/authenticate")
+    public ResponseEntity<AuthenticationResponse> authenticate(
+            @RequestBody AuthenticationRequest request) {
+        return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 }
