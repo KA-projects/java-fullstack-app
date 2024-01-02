@@ -6,6 +6,7 @@ import Register from "./components/Register.vue";
 import Login from "./components/Login.vue";
 
 // import "ant-design-vue/dist/reset.css";
+
 const routes: RouterOptions["routes"] = [
   { path: "/", component: Register },
   { path: "/login", component: Login },
