@@ -1,8 +1,10 @@
-<script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <h1 class="text-3xl font-bold underline text-red-400">Hello world!</h1>
-  <HelloWorld />
+  <div class="flex gap-5">
+    <RouterLink to="/">Register</RouterLink>
+    <RouterLink to="/login">Login</RouterLink>
+  </div>
+
+  <RouterView></RouterView>
 </template>
