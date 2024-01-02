@@ -1,59 +1,52 @@
-<script setup lang="ts">
-import { onMounted, ref } from 'vue'
-
-defineProps<{ msg: string }>()
-
-const count = ref(0);
-const content = ref();
-
-onMounted(() => {
-  fetchData();
-});
-
-const fetchData = async () => {
-  const res = await fetch("http://localhost:8080/users",
-    {
-      // headers: 'Access-Control-Allow-Origin'
-    }
-  );
-  console.log(res);
-
-  const data = await res.json();
-  console.log(data);
-  content.value = data;
-
-}
-
-</script>
-
 <template>
-  <h1>{{ msg }}</h1>
+  <a-form
+    :model="formState"
+    name="basic"
+    :label-col="{ span: 8 }"
+    :wrapper-col="{ span: 16 }"
+    autocomplete="off"
+    @finish="onFinish"
+    @finishFailed="onFinishFailed"
+  >
+    <a-form-item
+      label="Username"
+      name="username"
+      :rules="[{ required: true, message: 'Please input your username!' }]"
+    >
+      <a-input v-model:value="formState.username" />
+    </a-form-item>
 
-  <div>Answer is {{ content }} </div>
+    <a-form-item
+      label="Password"
+      name="password"
+      :rules="[{ required: true, message: 'Please input your password!' }]"
+    >
+      <a-input-password v-model:value="formState.password" />
+    </a-form-item>
 
-  <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
-  </div>
-
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank">create-vue</a>, the official Vue + Vite
-    starter
-  </p>
-  <p>
-    Install
-    <a href="https://github.com/vuejs/language-tools" target="_blank">Volar</a>
-    in your IDE for a better DX
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+    <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
+      <a-button type="primary" html-type="submit">Submit</a-button>
+    </a-form-item>
+  </a-form>
 </template>
 
-<style scoped>
-.read-the-docs {
-  color: #888;
+<script lang="ts" setup>
+import { reactive } from "vue";
+
+interface FormState {
+  username: string;
+  password: string;
 }
-</style>
+
+const formState = reactive<FormState>({
+  username: "",
+  password: "",
+});
+const onFinish = (values: any) => {
+  console.log("Success:", values);
+};
+
+const onFinishFailed = (errorInfo: any) => {
+  console.log("Failed:", errorInfo);
+};
+</script>
